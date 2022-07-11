@@ -1,4 +1,4 @@
-import 'package:animalinformation/models/category.dart';
+import '../models/category.dart';
 
 class Utils {
   static List<Category> getMockedCategories() {

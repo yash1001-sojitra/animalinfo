@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/category.dart';
 import '../detailScreen/detailpage.dart';
 import '../helper/utils.dart';
+import '../models/category.dart';
 
 class Demo extends StatefulWidget {
   const Demo({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class Demo extends StatefulWidget {
 }
 
 class _DemoState extends State<Demo> {
-  List<Category> categories = Utils.getMockedCategories();
+  List categories = Utils.getMockedCategories();
   @override
   Widget build(BuildContext context) {
     return Column(

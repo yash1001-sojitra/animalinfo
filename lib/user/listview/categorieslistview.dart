@@ -1,13 +1,14 @@
 // ignore_for_file: non_constant_identifier_names
 
 
-import 'package:animalinformation/models/category.dart';
-import 'package:animalinformation/models/categorycard.dart';
+
 import 'package:flutter/material.dart';
 
 import '../Tabscreens/atoz.dart';
 import '../detailScreen/detailpage.dart';
 import '../helper/utils.dart';
+import '../models/category.dart';
+import '../models/categorycard.dart';
 
 class CategoryListpage extends StatefulWidget {
   const CategoryListpage({Key? key}) : super(key: key);

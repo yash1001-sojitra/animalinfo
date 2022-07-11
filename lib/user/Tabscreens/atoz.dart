@@ -1,8 +1,8 @@
-import 'package:animalinformation/models/category.dart';
-import 'package:animalinformation/models/categorycard.dart';
 import 'package:flutter/material.dart';
 
 import '../helper/utils.dart';
+import '../models/category.dart';
+import '../models/categorycard.dart';
 
 class atozcategorycard extends StatefulWidget {
   Category category;

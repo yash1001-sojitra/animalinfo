@@ -1,4 +1,3 @@
-import 'package:animalinformation/models/category.dart';
 
 
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../detailScreen/speciescategory.dart';
 import '../helper/utils.dart';
+import '../models/category.dart';
 
 class Categorytab extends StatefulWidget {
   const Categorytab({Key? key}) : super(key: key);

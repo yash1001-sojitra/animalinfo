@@ -1,9 +1,9 @@
-import 'package:animalinformation/models/category.dart';
-import 'package:animalinformation/models/categorycard.dart';
 import 'package:flutter/material.dart';
 
 import '../detailScreen/detailpage.dart';
 import '../helper/utils.dart';
+import '../models/category.dart';
+import '../models/categorycard.dart';
 
 class Ourpick extends StatefulWidget {
   const Ourpick({Key? key}) : super(key: key);
