@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1060773596715",
+    "project_id": "animal-info-f9526",
+    "storage_bucket": "animal-info-f9526.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060773596715:android:fd9a82b0d23ba9b4bc646e",
+        "android_client_info": {
+          "package_name": "com.example.animalinformation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060773596715-8up4mqfol2s0870v86cnejgcvuafolbu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.animalinformation",
+            "certificate_hash": "41434313e07064906c098989e4337bfa1932e76f"
+          }
+        },
+        {
+          "client_id": "1060773596715-r6bemd6iaq3ra2hl8d555oniqqi2aun5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTSoBR0y58msoGqMpRuLfnU9Jr7ZIBDJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060773596715-r6bemd6iaq3ra2hl8d555oniqqi2aun5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
