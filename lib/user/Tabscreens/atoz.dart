@@ -1,107 +1,51 @@
-// ignore_for_file: camel_case_types, must_be_immutable
+// ignore_for_file: camel_case_types, must_be_immutable, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../helper/utils.dart';
-import '../models/category.dart';
-import '../models/categorycard.dart';
+import '../../logic/modules/animaldata_model.dart';
+import '../detailScreen/detailpage.dart';
+import '../models/animaldatalist_model.dart';
 
-class atozcategorycard extends StatefulWidget {
-  Category category;
-  atozcategorycard(this.category, {Key? key}) : super(key: key);
+class atozcategory extends StatefulWidget {
+  const atozcategory({Key? key}) : super(key: key);
 
   @override
-  State<atozcategorycard> createState() => _atozcategorycardState();
+  State<atozcategory> createState() => _atozcategoryState();
 }
 
-class _atozcategorycardState extends State<atozcategorycard> {
-  late bool _isLoading = true;
-
-  @override
-  void initState() {
-    // Future.delayed(const Duration(seconds: 6), () {
-    setState(() {
-      _isLoading = false;
-    });
-    // });
-    super.initState();
-  }
-
+class _atozcategoryState extends State<atozcategory> {
   @override
   Widget build(BuildContext context) {
-    List<Category> categories = Utils.getMockedCategories();
-
-    return Container(
-      margin: const EdgeInsets.only(right: 20, left: 20, top: 20),
-      height: 190,
-      child: _isLoading
-          ? ListView.separated(
-              itemCount: categories.length,
-              itemBuilder: (context, index) {
-                return const NewsCardSkelton();
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 20),
-            )
-          : Stack(children: [
-              Positioned.fill(
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: Colors.white),
-                      borderRadius: BorderRadius.circular(20)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: FadeInImage.assetNetwork(
-                      placeholder: 'assets/lodinggif.gif',
-                      image: widget.category.imagename,
-                      fit: BoxFit.cover,
+    final animalList = Provider.of<List<AnimalData>?>(context);
+    return animalList != null
+        ? ListView.builder(
+            itemCount: animalList.length,
+            itemBuilder: (context, index) {
+              final sorteditems = animalList
+                ..sort((item1, item2) =>
+                    item1.animalName.compareTo(item2.animalName));
+              final Categorysort = sorteditems[index];
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Detailspage(),
+                      settings: RouteSettings(
+                        arguments: animalList[index],
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: 190,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20)),
-                    gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.black.withOpacity(0.2),
-                          Colors.black54
-                        ]),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        "     " + widget.category.species,
-                        style: const TextStyle(
-                            color: Colors.white60, fontSize: 18),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "    " + widget.category.animalName,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 30),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ]),
-    );
+                  );
+                },
+                child: AnimalDataListModel(
+                    animalname: Categorysort.animalName,
+                    animaltype: Categorysort.animalType,
+                    src: Categorysort.url),
+              );
+            })
+        : const CircularProgressIndicator(
+            color: Colors.white,
+          );
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../logic/modules/animaldata_model.dart';
 import '../detailScreen/detailpage.dart';
 import '../helper/utils.dart';
+import '../models/animaldatalist_model.dart';
 import '../models/category.dart';
-import '../models/categorycard.dart';
 
 class Ourpick extends StatefulWidget {
   const Ourpick({Key? key}) : super(key: key);
@@ -16,31 +18,31 @@ class _OurpickState extends State<Ourpick> {
   List<Category> categories = Utils.getMockedCategories();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: ListView.builder(
+    final animalList = Provider.of<List<AnimalData>?>(context);
+    return animalList != null
+        ? ListView.builder(
+            itemCount: animalList.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                child: CategoryCard(categories[index]),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const Detailspage(),
                       settings: RouteSettings(
-                        arguments: categories[index],
+                        arguments: animalList[index],
                       ),
                     ),
                   );
                 },
+                child: AnimalDataListModel(
+                    animalname: animalList[index].animalName,
+                    animaltype: animalList[index].animalType,
+                    src: animalList[index].url),
               );
-            },
-            itemCount: categories.length,
-          ),
-        ),
-      ],
-    );
+            })
+        : const CircularProgressIndicator(
+            color: Colors.white,
+          );
   }
 }

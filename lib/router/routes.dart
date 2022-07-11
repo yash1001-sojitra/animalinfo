@@ -2,6 +2,7 @@ import 'package:animalinformation/Admin/admindashboard/admindash.dart';
 import 'package:animalinformation/Authentication/signinpage.dart';
 import 'package:animalinformation/Authentication/signuppage.dart';
 import 'package:animalinformation/core/constant/string.dart';
+import 'package:animalinformation/user/detailScreen/detailpage.dart';
 import 'package:animalinformation/user/homescreen/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +23,8 @@ class Routes {
         return MaterialPageRoute(builder: (context) => const SplashScreen());
 
       case onboardingScreenRoute:
-        return MaterialPageRoute(builder: (context) => const OnboardingScreen());
+        return MaterialPageRoute(
+            builder: (context) => const OnboardingScreen());
 
       case singInScreenRoute:
         return MaterialPageRoute(builder: (context) => const SignInpage());
@@ -33,8 +35,11 @@ class Routes {
       case homepageScreenRoute:
         return MaterialPageRoute(builder: (context) => const HomePage());
 
-        case adminDashbordScreenRoute:
+      case adminDashbordScreenRoute:
         return MaterialPageRoute(builder: (context) => const Admindash());
+
+      case detailpageScreenRoute:
+        return MaterialPageRoute(builder: (context) => const Detailspage());
 
       default:
         return MaterialPageRoute(

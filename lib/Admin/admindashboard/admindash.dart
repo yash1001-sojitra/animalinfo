@@ -32,7 +32,7 @@ class _AdmindashState extends State<Admindash> {
       drawerEnableOpenDragGesture: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Admin"),
+        title: const Text("Admin"),
         centerTitle: true,
         leading: Builder(builder: (context) {
           return IconButton(

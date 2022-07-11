@@ -173,11 +173,9 @@ class _profilepageState extends State<profilepage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           textfield(
-                              hintText:
-                                  'Name : ${userDataListRaw!.first.Name}'),
+                              hintText: 'Name : ${userDataList.first.Name}'),
                           textfield(
-                              hintText:
-                                  'Email : ${userDataListRaw.first.email}')
+                              hintText: 'Email : ${userDataList.first.email}')
                         ],
                       ),
                     ),

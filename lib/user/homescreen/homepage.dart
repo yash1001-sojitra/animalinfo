@@ -1,19 +1,14 @@
 // ignore_for_file: unused_field
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:animalinformation/user/Tabscreens/atoz.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:english_words/english_words.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:provider/provider.dart';
+import '../../logic/modules/animaldata_model.dart';
 import '../Tabscreens/categorytab.dart';
 import '../Tabscreens/demo.dart';
 import '../Tabscreens/ourpick.dart';
 import '../Tabscreens/popular.dart';
-import '../listview/categorieslistview.dart';
 import 'drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -147,59 +142,15 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                       child: TabBarView(
                     // controller: _controller,
                     children: [
-                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                          stream: FirebaseFirestore.instance
-                              .collection("MAMMALS")
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else {
-                              // print(snapshot.data!.docs.first['AnimalName']);
-                              return const PopularAnimal(); //popular
-                            }
-                          }),
-                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                          stream: FirebaseFirestore.instance
-                              .collection("MAMMALS")
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else {
-                              // print(snapshot.data!.docs.first['AnimalName']);
-                              return const Atozcategorypage(); //A to Z
-                            }
-                          }),
-                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                          stream: FirebaseFirestore.instance
-                              .collection("Ourpick")
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else {
-                              // print(snapshot.data!.docs.first['AnimalName']);
-                              return const Ourpick(); //Our pick
-                            }
-                          }),
-
-                      const Categorytab(), //Catagory
-
-                      const Demo(),
+                      PopularAnimal(), //popular
+                      atozcategory(), //A to Z
+                      Ourpick(), //Our pick
+                      Categorytab(), //Catagory
+                      Demo(),
                     ],
                   ))
                 ],
@@ -209,8 +160,6 @@ class _HomePageState extends State<HomePage> {
 }
 
 class CustomDelegate extends SearchDelegate<String> {
-  List<String> data = nouns.take(100).toList();
-
   @override
   List<Widget> buildActions(BuildContext context) =>
       [IconButton(icon: const Icon(Icons.clear), onPressed: () => query = '')];
@@ -225,21 +174,14 @@ class CustomDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> listToShow;
-    if (query.isNotEmpty) {
-      listToShow =
-          data.where((e) => e.contains(query) && e.startsWith(query)).toList();
-    } else {
-      listToShow = data;
-    }
+    final animalList = Provider.of<List<AnimalData>?>(context);
 
     return ListView.builder(
-      itemCount: listToShow.length,
+      itemCount: animalList!.length,
       itemBuilder: (_, i) {
-        var noun = listToShow[i];
         return ListTile(
-          title: Text(noun),
-          onTap: () => close(context, noun),
+          title: Text(animalList[i].animalName.toLowerCase()),
+          onTap: () => close(context, animalList[i].animalName),
         );
       },
     );

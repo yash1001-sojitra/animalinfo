@@ -1,11 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-
+import '../../logic/modules/animaldata_model.dart';
 import '../homescreen/drawer.dart';
-import '../models/category.dart';
 
 class Detailspage extends StatefulWidget {
   const Detailspage({
@@ -18,17 +15,9 @@ class Detailspage extends StatefulWidget {
 
 class _DetailspageState extends State<Detailspage> {
   @override
-  void initState() {
-    super.initState();
-    // Enable virtual display.
-    if (Platform.isAndroid) {
-      WebView.platform = AndroidWebView();
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final categorys = ModalRoute.of(context)!.settings.arguments as Category;
+    final categoryview =
+        ModalRoute.of(context)!.settings.arguments as AnimalData;
     return Scaffold(
       drawer: const Drawerbtn(),
       drawerEnableOpenDragGesture: true,
@@ -62,14 +51,14 @@ class _DetailspageState extends State<Detailspage> {
                     expandedHeight: 240,
                     flexibleSpace: FlexibleSpaceBar(
                         title: Text(
-                          categorys.animalName,
+                          categoryview.animalName,
                           style: const TextStyle(
                             color: Colors.white,
                           ),
                         ),
                         background: FadeInImage.assetNetwork(
                           placeholder: 'assets/lodinggif.gif',
-                          image: categorys.imagename,
+                          image: categoryview.url,
                           fit: BoxFit.cover,
                         )),
                     actions: [

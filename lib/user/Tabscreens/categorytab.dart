@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -18,7 +16,6 @@ class _CategorytabState extends State<Categorytab> {
   late bool _isLoading = true;
   @override
   void initState() {
-    // Future.delayed(const Duration(seconds: 6), () {
     setState(() {
       _isLoading = false;
     });
@@ -26,28 +23,9 @@ class _CategorytabState extends State<Categorytab> {
     super.initState();
   }
 
-  // setValueToFirebase(List<speciescategory> spicesnames) {
-  //   List<Category> categories = Utils.getMockedCategories();
-
-  //   for (var i = 0; i < spicesnames.length; i++) {
-  //     for (var j = 0; j < categories.length; j++) {
-  //       if (categories[j].species == spicesnames[i].species) {
-  //         FirebaseFirestore.instance
-  //             .collection(spicesnames[i].species)
-  //             .doc()
-  //             .set({
-  //           "AnimalName": categories[j].animalName,
-  //           "imageName": categories[j].imagename,
-  //         });
-  //       }
-  //     }
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     List<Speciescategory> categories = SpeicesUtils.getMockedCategories();
-    // setValueToFirebase(categories);
     return StaggeredGridView.countBuilder(
       crossAxisCount: 4,
       itemCount: categories.length,
