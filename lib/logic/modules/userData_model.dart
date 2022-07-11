@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, non_constant_identifier_names
+
 class UserData {
   String id;
   String Name;
@@ -6,9 +8,9 @@ class UserData {
   DateTime time;
   UserData(
       {
+      required this.id,
       required this.Name,
       required this.email,
-      required this.id,
       required this.userimage,
       required this.time});
 

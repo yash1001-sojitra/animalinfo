@@ -1,5 +1,7 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:animalinformation/logic/provider/animaldata_provider.dart';
+import 'package:animalinformation/logic/service/fireStoreServices/animal_firestore_services.dart';
 import 'package:animalinformation/router/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +23,15 @@ Future<void> main() async {
   runApp(MultiProvider(
     providers: [
       StreamProvider.value(
+        value: AnimalDataFirestoreService().getAnimalData(),
+        initialData: null,
+      ),
+      StreamProvider.value(
         value: UserDataFirestoreService().getUserData(),
         initialData: null,
+      ),
+      ChangeNotifierProvider.value(
+        value: AnimalDataProvider(),
       ),
       ChangeNotifierProvider.value(
         value: UsereDataProvider(),

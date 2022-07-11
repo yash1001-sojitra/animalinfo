@@ -1,7 +1,5 @@
-import 'package:animalinformation/Authentication/signuppage.dart';
 import 'package:animalinformation/core/constant/string.dart';
 import 'package:animalinformation/core/constant/textcontroller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +7,6 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../logic/service/auth_services/auth_service.dart';
 import '../onboardingandspalshscreen/splashscreen.dart';
-import '../user/homescreen/homepage.dart';
 
 class SignInpage extends StatefulWidget {
   const SignInpage({Key? key}) : super(key: key);

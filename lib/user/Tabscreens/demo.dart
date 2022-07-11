@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../detailScreen/detailpage.dart';
 import '../helper/utils.dart';
-import '../models/category.dart';
 
 class Demo extends StatefulWidget {
   const Demo({Key? key}) : super(key: key);

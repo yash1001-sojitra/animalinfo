@@ -99,7 +99,7 @@ class _DetailspageState extends State<Detailspage> {
                     ],
                   ),
                 ],
-            body: SafeArea(
+            body: const SafeArea(
               child: Text(" "),
             )),
       ),

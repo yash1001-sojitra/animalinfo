@@ -18,13 +18,13 @@ class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splashScreenRoute:
-        return MaterialPageRoute(builder: (context) => SplashScreen());
+        return MaterialPageRoute(builder: (context) => const SplashScreen());
 
       case onboardingScreenRoute:
-        return MaterialPageRoute(builder: (context) => OnboardingScreen());
+        return MaterialPageRoute(builder: (context) => const OnboardingScreen());
 
       case singInScreenRoute:
-        return MaterialPageRoute(builder: (context) => SignInpage());
+        return MaterialPageRoute(builder: (context) => const SignInpage());
 
       case signUpScreenRoute:
         return MaterialPageRoute(builder: (context) => const SignupPage());

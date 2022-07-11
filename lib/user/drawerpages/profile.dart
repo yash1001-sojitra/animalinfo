@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -206,12 +208,13 @@ class _profilepageState extends State<profilepage> {
       return showDialog(
           context: context,
           builder: (BuildContext context) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           });
-    } else
+    } else {
       return null;
+    }
   }
 
   Widget buildCircle({
