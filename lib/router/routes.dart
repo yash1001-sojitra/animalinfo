@@ -1,3 +1,4 @@
+import 'package:animalinformation/Admin/admindashboard/admindash.dart';
 import 'package:animalinformation/Authentication/signinpage.dart';
 import 'package:animalinformation/Authentication/signuppage.dart';
 import 'package:animalinformation/core/constant/string.dart';
@@ -31,6 +32,9 @@ class Routes {
 
       case homepageScreenRoute:
         return MaterialPageRoute(builder: (context) => const HomePage());
+
+        case adminDashbordScreenRoute:
+        return MaterialPageRoute(builder: (context) => const Admindash());
 
       default:
         return MaterialPageRoute(

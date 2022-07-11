@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:animalinformation/core/constant/textcontroller.dart';
 import 'package:animalinformation/logic/provider/animaldata_provider.dart';
 import 'package:animalinformation/user/homescreen/drawer.dart';
 import 'package:file_picker/file_picker.dart';
@@ -27,9 +28,12 @@ class _AdmindashState extends State<Admindash> {
   Widget build(BuildContext context) {
     final AnimaldataProvider = Provider.of<AnimalDataProvider>(context);
     return Scaffold(
+      backgroundColor: const Color(0xff1a1a1a),
       drawerEnableOpenDragGesture: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        title: Text("Admin"),
+        centerTitle: true,
         leading: Builder(builder: (context) {
           return IconButton(
               splashColor: Colors.transparent,
@@ -54,10 +58,9 @@ class _AdmindashState extends State<Admindash> {
         ),
       ),
       drawer: const Drawerbtn(),
-      body: Form(
-        key: _form,
-        child: Container(
-          color: const Color(0xff1a1a1a),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _form,
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8),
             child: Column(
@@ -79,6 +82,7 @@ class _AdmindashState extends State<Admindash> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: TextFormField(
+                        controller: animalnameController,
                         onChanged: (value) {
                           String Data = value.toUpperCase();
                           AnimaldataProvider.changeAnimalName(Data);
@@ -91,7 +95,7 @@ class _AdmindashState extends State<Admindash> {
                       ),
                     )),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Container(
                     height: 60,
@@ -103,6 +107,7 @@ class _AdmindashState extends State<Admindash> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: TextFormField(
+                        controller: animaltypeController,
                         onChanged: (value) {
                           String Data = value.toUpperCase();
                           AnimaldataProvider.changeAnimaltype(Data);
@@ -114,6 +119,21 @@ class _AdmindashState extends State<Admindash> {
                             hintText: "Animal Type Here"),
                       ),
                     )),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: pickedFile != null
+                      ? Image.file(
+                          (File("${pickedFile!.path}")),
+                          height: 200,
+                          width: MediaQuery.of(context).size.width * 0.80,
+                        )
+                      : Image.asset(
+                          "assets/images/nodata.jpg",
+                          height: 100,
+                        ),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -168,10 +188,11 @@ class _AdmindashState extends State<Admindash> {
                       AnimaldataProvider.changeUrl(url);
                       AnimaldataProvider.changetime(DateTime.now());
                       AnimaldataProvider.saveAnimalData();
+                      animalnameController.clear();
+                      animaltypeController.clear();
                       setState(() {
                         showLoading = false;
                       });
-                      Navigator.pop(context);
                       Navigator.pop(context);
                     },
                     child: const Text("Submit Data"),
@@ -187,6 +208,7 @@ class _AdmindashState extends State<Admindash> {
 
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles();
+
     if (result == null) return;
     setState(() {
       pickedFile = result.files.first;
