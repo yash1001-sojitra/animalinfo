@@ -1,12 +1,11 @@
 import 'dart:io';
 
-import 'package:animalinformation/drawerpage/zoomdrawer.dart';
-import 'package:animalinformation/homescreen/drawer.dart';
-
 import 'package:animalinformation/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../homescreen/drawer.dart';
 
 class Detailspage extends StatefulWidget {
   const Detailspage({

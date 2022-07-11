@@ -1,5 +1,6 @@
-import 'package:animalinformation/homescreen/homepage.dart';
 import 'package:flutter/material.dart';
+
+import '../homescreen/homepage.dart';
 
 class About extends StatefulWidget {
   const About({Key? key}) : super(key: key);

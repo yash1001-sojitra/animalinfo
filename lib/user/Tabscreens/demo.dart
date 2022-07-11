@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/category.dart';
 import '../detailScreen/detailpage.dart';
 import '../helper/utils.dart';
-import '../models/category.dart';
-import '../models/categorycard.dart';
 
 class Demo extends StatefulWidget {
   const Demo({Key? key}) : super(key: key);
@@ -25,11 +24,12 @@ class _DemoState extends State<Demo> {
               stream:
                   FirebaseFirestore.instance.collection('MAMMALS').snapshots(),
               builder: (_, snapshot) {
-                if (snapshot.hasError)
+                if (snapshot.hasError) {
                   return Text(
                     'Error = ${snapshot.error}',
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   );
+                }
 
                 if (snapshot.hasData) {
                   final docs = snapshot.data!.docs;

@@ -1,10 +1,10 @@
-import 'package:animalinformation/drawerpage/zoomdrawer.dart';
-import 'package:animalinformation/homescreen/homepage.dart';
-import 'package:animalinformation/registrationscreen/signuppage.dart';
+import 'package:animalinformation/Authentication/signuppage.dart';
 import 'package:animalinformation/splashscreen/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../user/homescreen/homepage.dart';
 
 class SignInpage extends StatefulWidget {
   const SignInpage({Key? key}) : super(key: key);

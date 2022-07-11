@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:animalinformation/registrationscreen/signinpage.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../Authentication/signinpage.dart';
+
 class SplashScreen extends StatefulWidget {
- 
   const SplashScreen({Key? key}) : super(key: key);
 
   @override

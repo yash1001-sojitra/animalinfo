@@ -1,17 +1,18 @@
-import 'package:animalinformation/detailScreen/detailpage.dart';
-import 'package:animalinformation/helper/utils.dart';
 import 'package:animalinformation/models/category.dart';
 import 'package:animalinformation/models/categorycard.dart';
 import 'package:flutter/material.dart';
 
-class Ourpick extends StatefulWidget {
-  const Ourpick({Key? key}) : super(key: key);
+import '../detailScreen/detailpage.dart';
+import '../helper/utils.dart';
+
+class PopularAnimal extends StatefulWidget {
+  const PopularAnimal({Key? key}) : super(key: key);
 
   @override
-  State<Ourpick> createState() => _OurpickState();
+  State<PopularAnimal> createState() => _PopularAnimalState();
 }
 
-class _OurpickState extends State<Ourpick> {
+class _PopularAnimalState extends State<PopularAnimal> {
   List<Category> categories = Utils.getMockedCategories();
   @override
   Widget build(BuildContext context) {

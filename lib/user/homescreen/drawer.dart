@@ -1,11 +1,13 @@
-import 'package:animalinformation/drawerpages/favourite.dart';
-import 'package:animalinformation/drawerpages/profile.dart';
-import 'package:animalinformation/drawerpages/setting.dart';
-import 'package:animalinformation/registrationscreen/signinpage.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../Authentication/signinpage.dart';
+import '../drawerpages/favourite.dart';
+import '../drawerpages/profile.dart';
+import '../drawerpages/setting.dart';
 
 class Drawerbtn extends StatelessWidget {
   const Drawerbtn({Key? key}) : super(key: key);

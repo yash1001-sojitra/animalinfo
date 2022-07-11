@@ -1,14 +1,5 @@
 // ignore_for_file: unused_field
 
-import 'package:animalinformation/Tabscreens/categorytab.dart';
-import 'package:animalinformation/Tabscreens/demo.dart';
-import 'package:animalinformation/Tabscreens/ourpick.dart';
-import 'package:animalinformation/Tabscreens/popular.dart';
-import 'package:animalinformation/drawerpage/zoomdrawer.dart';
-
-import 'package:animalinformation/homescreen/drawer.dart';
-
-import 'package:animalinformation/listview/categorieslistview.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,6 +8,13 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+
+import '../Tabscreens/categorytab.dart';
+import '../Tabscreens/demo.dart';
+import '../Tabscreens/ourpick.dart';
+import '../Tabscreens/popular.dart';
+import '../listview/categorieslistview.dart';
+import 'drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

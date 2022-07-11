@@ -1,4 +1,4 @@
-import 'package:animalinformation/registrationscreen/signinpage.dart';
+import 'package:animalinformation/Authentication/signinpage.dart';
 import 'package:animalinformation/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

@@ -1,11 +1,13 @@
-import 'package:animalinformation/detailScreen/detailpage.dart';
-import 'package:animalinformation/helper/utils.dart';
-import 'package:animalinformation/homescreen/drawer.dart';
+
 
 import 'package:animalinformation/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../helper/utils.dart';
+import '../homescreen/drawer.dart';
+import 'detailpage.dart';
 
 
 class Speicesdetailspage extends StatefulWidget {

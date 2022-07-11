@@ -1,11 +1,12 @@
 // ignore_for_file: must_be_immutable, unused_import
 
-import 'package:animalinformation/helper/utils.dart';
 import 'package:animalinformation/models/category.dart';
-import 'package:animalinformation/modern/shimmer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+
+import '../user/helper/utils.dart';
+import '../user/modern/shimmer.dart';
 
 class CategoryCard extends StatefulWidget {
   Category category;

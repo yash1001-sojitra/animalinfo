@@ -1,12 +1,12 @@
-import 'package:animalinformation/drawerpage/blackpage.dart';
-import 'package:animalinformation/homescreen/drawer.dart';
-import 'package:animalinformation/homescreen/homepage.dart';
+
 import 'package:animalinformation/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../homescreen/homepage.dart';
 
 final ZoomDrawerController z = ZoomDrawerController();
 
