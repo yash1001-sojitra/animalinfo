@@ -1,5 +1,14 @@
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../logic/modules/userData_model.dart';
+import '../../logic/provider/userData_provider.dart';
+import '../../logic/service/auth_services/auth_service.dart';
 
 // ignore: camel_case_types
 class profilepage extends StatefulWidget {
@@ -11,6 +20,10 @@ class profilepage extends StatefulWidget {
 
 // ignore: camel_case_types
 class _profilepageState extends State<profilepage> {
+  late File imageFile;
+  PlatformFile? pickedFile;
+  bool showLoading = false;
+
   Widget textfield({@required hintText}) {
     return Material(
       elevation: 3,
@@ -37,6 +50,17 @@ class _profilepageState extends State<profilepage> {
 
   @override
   Widget build(BuildContext context) {
+    UserData? userData;
+    final authService = Provider.of<AuthService>(context);
+    User user = authService.getcurrentUser();
+    List<UserData> userDataList = [];
+    final userprovider = Provider.of<UsereDataProvider>(context);
+    final userDataListRaw = Provider.of<List<UserData>?>(context);
+    userDataListRaw?.forEach((element) {
+      if (user.uid == element.id) {
+        userDataList.add(element);
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black26,
@@ -59,19 +83,33 @@ class _profilepageState extends State<profilepage> {
           },
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: TextButton(
-              style: ButtonStyle(
-                  overlayColor:
-                      MaterialStateProperty.all<Color>(Colors.transparent)),
-              onPressed: () {},
-              child: const Text(
-                "Save",
-                style: TextStyle(color: Colors.white, fontSize: 17),
-              ),
-            ),
-          )
+          pickedFile != null
+              ? GestureDetector(
+                  onTap: () async {
+                    setState(() {
+                      showLoading = true;
+                    });
+                    progressIndicater(context, showLoading = true);
+                    final ref = FirebaseStorage.instance
+                        .ref()
+                        .child('profileImg')
+                        .child(pickedFile!.name.toString());
+                    await ref.putFile(imageFile);
+                    String url = await ref.getDownloadURL();
+                    userprovider.changeUserimage(url);
+                    userprovider.updateProfileImg(user.uid);
+                    setState(() {
+                      showLoading = false;
+                      pickedFile = null;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 28.0),
+                    child: Center(
+                        child: Text("Save", style: TextStyle(fontSize: 17))),
+                  ))
+              : const SizedBox(),
         ],
       ),
       backgroundColor: const Color(0xff2a2a2a),
@@ -83,20 +121,39 @@ class _profilepageState extends State<profilepage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(
-                    height: 30,
+                    height: 60,
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(10.0),
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    height: MediaQuery.of(context).size.width / 2.5,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 5),
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/profile_image.png'),
-                      ),
+                  Center(
+                    child: Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: 75,
+                          backgroundColor: Colors.grey,
+                          child: CircleAvatar(
+                            backgroundImage: pickedFile != null
+                                ? FileImage((File("${pickedFile!.path}")))
+                                : NetworkImage(userDataList.first.userimage)
+                                    as ImageProvider,
+                            radius: 70,
+                          ),
+                        ),
+                        Positioned(
+                          child: buildCircle(
+                              all: 8,
+                              child: GestureDetector(
+                                onTap: () {
+                                  selectFile();
+                                },
+                                child: const Icon(
+                                  Icons.edit,
+                                  color: Color.fromRGBO(64, 105, 225, 1),
+                                  size: 20,
+                                ),
+                              )),
+                          right: 3,
+                          top: 110,
+                        )
+                      ],
                     ),
                   ),
                 ],
@@ -106,7 +163,7 @@ class _profilepageState extends State<profilepage> {
                 children: [
                   Form(
                     child: Container(
-                      height: 350,
+                      height: 200,
                       width: double.infinity,
                       margin: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 40),
@@ -114,17 +171,11 @@ class _profilepageState extends State<profilepage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           textfield(
-                            hintText: 'Username',
-                          ),
+                              hintText:
+                                  'Name : ${userDataListRaw!.first.Name}'),
                           textfield(
-                            hintText: 'Email',
-                          ),
-                          textfield(
-                            hintText: 'Password',
-                          ),
-                          textfield(
-                            hintText: 'Confirm password',
-                          ),
+                              hintText:
+                                  'Email : ${userDataListRaw.first.email}')
                         ],
                       ),
                     ),
@@ -137,4 +188,40 @@ class _profilepageState extends State<profilepage> {
       ),
     );
   }
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+    setState(() {
+      pickedFile = result.files.first;
+
+      if (pickedFile != null) {
+        imageFile = File(pickedFile!.path!);
+      }
+    });
+  }
+
+  Future<dynamic>? progressIndicater(BuildContext context, showLoading) {
+    if (showLoading == true) {
+      return showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          });
+    } else
+      return null;
+  }
+
+  Widget buildCircle({
+    required Widget child,
+    required double all,
+  }) =>
+      ClipOval(
+          child: Container(
+        padding: EdgeInsets.all(all),
+        color: Colors.white,
+        child: child,
+      ));
 }

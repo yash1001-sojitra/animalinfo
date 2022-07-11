@@ -1,9 +1,15 @@
 import 'dart:async';
 
+import 'package:animalinformation/Admin/admindashboard/admindash.dart';
+import 'package:animalinformation/user/homescreen/homepage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../Authentication/signinpage.dart';
+
+FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -13,18 +19,49 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  int loginNum = 0;
+  var emailAddress;
   @override
   void initState() {
+    super.initState();
+    checkUserType();
     Timer(
         const Duration(seconds: 5),
         () => {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) {
-                return const SignInpage();
-              }))
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => loginNum == 1
+                      ? const Admindash()
+                      : loginNum == 2
+                          ? const HomePage()
+                          : const SignInpage(),
+                ),
+              )
             });
+  }
 
-    super.initState();
+  checkUserType() {
+    var auth = FirebaseAuth.instance;
+    auth.authStateChanges().listen((user) {
+      if (user != null) {
+        user = auth.currentUser;
+        emailAddress = user!.email;
+        if (emailAddress == 'admin@gmail.com') {
+          setState(() {
+            loginNum = 1;
+          });
+        } else {
+          setState(() {
+            loginNum = 2;
+          });
+        }
+      } else {
+        setState(() {
+          loginNum = 3;
+        });
+      }
+    });
   }
 
   @override

@@ -1,9 +1,14 @@
 import 'package:animalinformation/Authentication/signuppage.dart';
-import 'package:animalinformation/splashscreen/splashscreen.dart';
+import 'package:animalinformation/core/constant/string.dart';
+import 'package:animalinformation/core/constant/textcontroller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../logic/service/auth_services/auth_service.dart';
+import '../onboardingandspalshscreen/splashscreen.dart';
 import '../user/homescreen/homepage.dart';
 
 class SignInpage extends StatefulWidget {
@@ -14,28 +19,16 @@ class SignInpage extends StatefulWidget {
 }
 
 class _SignInpageState extends State<SignInpage> {
+  late AuthService authService;
+  bool showLoading = false;
+  bool showAlert = false;
   bool ispasswordvisible = true;
-
-  late String _email, _password;
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   final _formkey = GlobalKey<FormState>();
-  var email = "";
-  var password = "";
-
-  final emailcontroller = TextEditingController();
-  final passwordcontroller = TextEditingController();
-
-  @override
-  void dispose() {
-    emailcontroller.dispose();
-    passwordcontroller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
+    authService = Provider.of<AuthService>(context);
+
     return Form(
       key: _formkey,
       child: Stack(
@@ -78,26 +71,13 @@ class _SignInpageState extends State<SignInpage> {
                         height: 70,
                         width: 325,
                         child: TextFormField(
-                          controller: emailcontroller,
+                          controller: emailController,
                           obscureText: false,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: Colors.white,
                           style: const TextStyle(
                               color: Colors.white, fontSize: 20),
-                          onChanged: (value) {
-                            setState(() {
-                              _email = value.trim();
-                            });
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Please Enter Email";
-                            } else if (!value.contains('@')) {
-                              return "Enter valid Email";
-                            }
-                            return null;
-                          },
                           decoration: const InputDecoration(
                             prefixIcon: Icon(
                               Icons.email,
@@ -116,17 +96,12 @@ class _SignInpageState extends State<SignInpage> {
                         height: 70,
                         width: 325,
                         child: TextFormField(
-                          controller: passwordcontroller,
+                          controller: passwordController,
                           cursorColor: Colors.white,
                           style: const TextStyle(
                               color: Colors.white, fontSize: 20),
                           obscureText: ispasswordvisible,
                           textInputAction: TextInputAction.done,
-                          onChanged: (value) {
-                            setState(() {
-                              _password = value.trim();
-                            });
-                          },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Please Enter Password";
@@ -171,24 +146,16 @@ class _SignInpageState extends State<SignInpage> {
                           border: Border.all(color: Colors.white),
                           color: Colors.black45),
                       child: TextButton(
-                        onPressed: () {
-                          // _auth.createUserWithEmailAndPassword(
-                          //     email: _email, password: _password);
-
-                          if (_formkey.currentState!.validate()) {
-                            setState(() {
-                              email = emailcontroller.text;
-                              password = passwordcontroller.text;
-                            });
-                          }
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const HomePage();
-                              },
-                            ),
-                          );
+                        onPressed: () async {
+                          setState(() {
+                            showLoading = true;
+                          });
+                          progressIndicater(context, showLoading = true);
+                          await loginByRole();
+                          showAlert == true
+                              ? null
+                              : progressIndicater(context, showLoading = true);
+                          Navigator.pop(context);
                         },
                         child: const Text(
                           "Sign In",
@@ -210,12 +177,7 @@ class _SignInpageState extends State<SignInpage> {
                           color: Colors.white54),
                       child: TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignupPage(),
-                            ),
-                          );
+                          Navigator.pushNamed(context, signUpScreenRoute);
                         },
                         child: const Text(
                           "Sign Up",
@@ -247,5 +209,47 @@ class _SignInpageState extends State<SignInpage> {
         ],
       ),
     );
+  }
+
+  Future<dynamic>? progressIndicater(BuildContext context, showLoading) {
+    if (showLoading == true) {
+      return showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          });
+    } else {
+      return null;
+    }
+  }
+
+  loginByRole() async {
+    try {
+      await authService.signInWithEmailAndPassword(
+          emailController.text.toString(), passwordController.text.toString());
+      if (emailController.text.toString() == 'admin@gmail.com') {
+        Navigator.pushNamedAndRemoveUntil(
+            context, adminDashbordScreenRoute, (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, homepageScreenRoute, (route) => false);
+      }
+    } catch (e) {
+      return alertBox(context, e);
+    }
+  }
+
+  Future<void> alertBox(BuildContext context, e) {
+    setState(() {
+      showLoading = false;
+      showAlert = true;
+    });
+    return Alert(
+      context: context,
+      title: "ALERT",
+      desc: e.toString(),
+    ).show();
   }
 }
