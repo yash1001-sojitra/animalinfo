@@ -1,8 +1,6 @@
 // ignore_for_file: camel_case_types, must_be_immutable, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../logic/modules/animaldata_model.dart';
 import '../detailScreen/detailpage.dart';
 import '../models/animaldatalist_model.dart';

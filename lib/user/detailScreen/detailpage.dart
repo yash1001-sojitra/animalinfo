@@ -1,13 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../logic/modules/animaldata_model.dart';
 import '../homescreen/drawer.dart';
 
 class Detailspage extends StatefulWidget {
-  const Detailspage({
-    Key? key,
-  }) : super(key: key);
+  const Detailspage({Key? key}) : super(key: key);
 
   @override
   State<Detailspage> createState() => _DetailspageState();
@@ -109,34 +106,6 @@ class _DetailspageState extends State<Detailspage> {
             body: const SafeArea(
               child: Text(" "),
             )),
-      ),
-    );
-  }
-}
-
-class BackgroundImageappbar extends StatelessWidget {
-  BackgroundImageappbar({
-    required this.src,
-    Key? key,
-  }) : super(key: key);
-  String src;
-  @override
-  Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (bounds) => const LinearGradient(
-        colors: [Colors.black, Colors.black12],
-        begin: Alignment.bottomCenter,
-        end: Alignment.center,
-      ).createShader(bounds),
-      blendMode: BlendMode.darken,
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(src),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black45, BlendMode.darken),
-          ),
-        ),
       ),
     );
   }

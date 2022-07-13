@@ -3,9 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../logic/modules/animaldata_model.dart';
 import '../detailScreen/detailpage.dart';
-import '../helper/utils.dart';
 import '../models/animaldatalist_model.dart';
-import '../models/category.dart';
 
 class Ourpick extends StatefulWidget {
   const Ourpick({Key? key}) : super(key: key);
@@ -15,7 +13,6 @@ class Ourpick extends StatefulWidget {
 }
 
 class _OurpickState extends State<Ourpick> {
-  List<Category> categories = Utils.getMockedCategories();
   @override
   Widget build(BuildContext context) {
     final animalList = Provider.of<List<AnimalData>?>(context);
