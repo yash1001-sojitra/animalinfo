@@ -44,8 +44,10 @@ class _atozcategoryState extends State<atozcategory> {
                     src: Categorysort.url),
               );
             })
-        : const CircularProgressIndicator(
-            color: Colors.white,
+        : const Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
           );
   }
 }

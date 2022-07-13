@@ -41,8 +41,10 @@ class _OurpickState extends State<Ourpick> {
                     src: animalList[index].url),
               );
             })
-        : const CircularProgressIndicator(
-            color: Colors.white,
+        : const Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
           );
   }
 }

@@ -1,14 +1,13 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
+import '../../logic/modules/animaldata_model.dart';
 import '../helper/utils.dart';
 import '../homescreen/drawer.dart';
 import '../models/category.dart';
 import 'detailpage.dart';
-
 
 class Speicesdetailspage extends StatefulWidget {
   const Speicesdetailspage({Key? key}) : super(key: key);
@@ -32,6 +31,7 @@ class _SpeicesdetailspageState extends State<Speicesdetailspage> {
   @override
   Widget build(BuildContext context) {
     List<Category> categories = Utils.getMockedCategories();
+    final animalList = Provider.of<List<AnimalData>?>(context);
 
     final spicesname =
         ModalRoute.of(context)!.settings.arguments as Speciescategory;

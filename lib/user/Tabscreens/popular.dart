@@ -37,8 +37,10 @@ class _PopularAnimalState extends State<PopularAnimal> {
                     src: animalList[index].url),
               );
             })
-        : const CircularProgressIndicator(
-            color: Colors.white,
+        : const Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
           );
   }
 }

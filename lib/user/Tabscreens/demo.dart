@@ -43,8 +43,10 @@ class _DemoState extends State<Demo> {
                     src: Categorysort.url),
               );
             })
-        : const CircularProgressIndicator(
-            color: Colors.white,
+        : const Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
           );
   }
 }
