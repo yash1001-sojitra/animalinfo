@@ -49,10 +49,10 @@ class _profilepageState extends State<profilepage> {
 
   @override
   Widget build(BuildContext context) {
+    List<UserData> userDataList = [];
     UserData? userData;
     final authService = Provider.of<AuthService>(context);
     User user = authService.getcurrentUser();
-    List<UserData> userDataList = [];
     final userprovider = Provider.of<UsereDataProvider>(context);
     final userDataListRaw = Provider.of<List<UserData>?>(context);
     userDataListRaw?.forEach((element) {
@@ -60,7 +60,7 @@ class _profilepageState extends State<profilepage> {
         userDataList.add(element);
       }
     });
-    
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black26,

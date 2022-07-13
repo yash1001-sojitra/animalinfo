@@ -9,6 +9,7 @@ import '../Tabscreens/categorytab.dart';
 import '../Tabscreens/demo.dart';
 import '../Tabscreens/ourpick.dart';
 import '../Tabscreens/popular.dart';
+import '../detailScreen/detailpage.dart';
 import 'drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -181,7 +182,17 @@ class CustomDelegate extends SearchDelegate<String> {
       itemBuilder: (_, i) {
         return ListTile(
           title: Text(animalList[i].animalName.toLowerCase()),
-          onTap: () => close(context, animalList[i].animalName),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Detailspage(),
+                settings: RouteSettings(
+                  arguments: animalList[i],
+                ),
+              ),
+            );
+          },
         );
       },
     );
