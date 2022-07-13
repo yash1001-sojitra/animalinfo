@@ -50,17 +50,35 @@ class _DetailspageState extends State<Detailspage> {
                     backgroundColor: Colors.grey,
                     expandedHeight: 240,
                     flexibleSpace: FlexibleSpaceBar(
-                        title: Text(
-                          categoryview.animalName,
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
+                      title: Text(
+                        categoryview.animalName,
+                        style: const TextStyle(
+                          color: Colors.white,
                         ),
-                        background: FadeInImage.assetNetwork(
-                          placeholder: 'assets/lodinggif.gif',
-                          image: categoryview.url,
-                          fit: BoxFit.cover,
-                        )),
+                      ),
+                      background: Stack(
+                        fit: StackFit.expand,
+                        children: <Widget>[
+                          FadeInImage.assetNetwork(
+                            placeholder: 'assets/lodinggif.gif',
+                            image: categoryview.url,
+                            fit: BoxFit.cover,
+                          ),
+                          const DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment(0.0, 0.55),
+                                end: Alignment.center,
+                                colors: <Color>[
+                                  Color.fromARGB(142, 0, 0, 0),
+                                  Color.fromARGB(0, 0, 0, 0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     actions: [
                       Builder(
                         builder: (context) {
@@ -91,6 +109,34 @@ class _DetailspageState extends State<Detailspage> {
             body: const SafeArea(
               child: Text(" "),
             )),
+      ),
+    );
+  }
+}
+
+class BackgroundImageappbar extends StatelessWidget {
+  BackgroundImageappbar({
+    required this.src,
+    Key? key,
+  }) : super(key: key);
+  String src;
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (bounds) => const LinearGradient(
+        colors: [Colors.black, Colors.black12],
+        begin: Alignment.bottomCenter,
+        end: Alignment.center,
+      ).createShader(bounds),
+      blendMode: BlendMode.darken,
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(src),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(Colors.black45, BlendMode.darken),
+          ),
+        ),
       ),
     );
   }
