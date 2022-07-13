@@ -1,4 +1,6 @@
 // ignore_for_file: unused_field
+import 'dart:math';
+
 import 'package:animalinformation/user/Tabscreens/atoz.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
@@ -176,19 +178,34 @@ class CustomDelegate extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     final animalList = Provider.of<List<AnimalData>?>(context);
+    List<String> listToShow;
+    List<String> animalnames = [];
+    animalList?.forEach((element) {
+      animalnames.add(element.animalName.toLowerCase());
+    });
 
+    if (query.isNotEmpty) {
+      listToShow = animalnames
+          .where((e) =>
+              e.contains(query.toLowerCase()) &&
+              e.startsWith(query.toLowerCase()))
+          .toList();
+    } else {
+      listToShow = animalnames;
+    }
     return ListView.builder(
-      itemCount: animalList!.length,
+      itemCount: listToShow.length,
       itemBuilder: (_, i) {
+        var animals = listToShow[i];
         return ListTile(
-          title: Text(animalList[i].animalName.toLowerCase()),
+          title: Text(animals),
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const Detailspage(),
                 settings: RouteSettings(
-                  arguments: animalList[i],
+                  arguments: animalList![i],
                 ),
               ),
             );
@@ -198,3 +215,43 @@ class CustomDelegate extends SearchDelegate<String> {
     );
   }
 }
+
+
+
+// class CustomDelegate extends SearchDelegate<String> {
+//   List<String> data = nouns.take(100).toList();
+
+//   @override
+//   List<Widget> buildActions(BuildContext context) =>
+//       [IconButton(icon: const Icon(Icons.clear), onPressed: () => query = '')];
+
+//   @override
+//   Widget buildLeading(BuildContext context) => IconButton(
+//       icon: const Icon(Icons.chevron_left),
+//       onPressed: () => close(context, ''));
+
+//   @override
+//   Widget buildResults(BuildContext context) => Container();
+
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     List<String> listToShow;
+//     if (query.isNotEmpty) {
+//       listToShow =
+//           data.where((e) => e.contains(query) && e.startsWith(query)).toList();
+//     } else {
+//       listToShow = data;
+//     }
+
+//     return ListView.builder(
+//       itemCount: listToShow.length,
+//       itemBuilder: (_, i) {
+//         var noun = listToShow[i];
+//         return ListTile(
+//           title: Text(noun),
+//           onTap: () => close(context, noun),
+//         );
+//       },
+//     );
+//   }
+// }
