@@ -26,4 +26,16 @@ class AnimalDataFirestoreService {
   Future<void> removeNotice(String AnimalId) {
     return _db.collection('AnimalData').doc(AnimalId).delete();
   }
+
+  Future<void> addFav(String animalId,String userId) {
+    return _db.collection('AnimalData').doc(animalId).update({
+      'Fav' : FieldValue.arrayUnion([userId])
+    });
+  }
+
+   Future<void> removeFav(String animalId,String userId) {
+    return _db.collection('AnimalData').doc(animalId).update({
+      'Fav' : FieldValue.arrayRemove([userId])
+    });
+  }
 }

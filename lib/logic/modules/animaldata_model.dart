@@ -4,12 +4,14 @@ class AnimalData {
   String animalType;
   late String url;
   DateTime time;
+  List favoriteList;
   AnimalData({
     required this.id,
     required this.animalName,
     required this.animalType,
     required this.url,
     required this.time,
+    required this.favoriteList,
   });
 
   Map<String, dynamic> createMap() {
@@ -18,7 +20,8 @@ class AnimalData {
       'AnimalName': animalName,
       'AnimalType': animalType,
       'url': url,
-      'time': time
+      'time': time,
+      'Fav' : favoriteList,
     };
   }
 
@@ -27,6 +30,7 @@ class AnimalData {
         animalName = firestoreMap['AnimalName'],
         animalType = firestoreMap['AnimalType'],
         url = firestoreMap['url'],
+        favoriteList = firestoreMap['Fav'],
         time = firestoreMap['time'].toDate();
 
   toList() {}

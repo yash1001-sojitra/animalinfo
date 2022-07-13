@@ -40,9 +40,19 @@ class AnimalDataProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void addFav(animalId,userId) {
+    service.addFav(animalId, userId);
+  }
+
+   void removeFav(animalId,userId) {
+    service.removeFav(animalId, userId);
+  }
+
+
   void saveAnimalData() {
     var newAnimalData = AnimalData(
         id: uuid.v4(),
+        favoriteList: [],
         animalName: _animalname,
         animalType: _animaltype,
         time: getTime,
@@ -53,4 +63,5 @@ class AnimalDataProvider with ChangeNotifier {
   void deleteAnimalData(AnimalId) {
     service.removeNotice(AnimalId);
   }
+
 }

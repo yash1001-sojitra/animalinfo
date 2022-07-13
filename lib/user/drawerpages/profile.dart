@@ -114,7 +114,8 @@ class _profilepageState extends State<profilepage> {
       ),
       backgroundColor: const Color(0xff2a2a2a),
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: userDataList.isEmpty ?  Container():
+         SingleChildScrollView(
           child: Column(
             children: [
               Column(
