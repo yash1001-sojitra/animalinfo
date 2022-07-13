@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../homescreen/homepage.dart';
+import 'package:rate/rate.dart';
 
 class About extends StatefulWidget {
   const About({Key? key}) : super(key: key);
@@ -30,25 +29,38 @@ class _AboutState extends State<About> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
-                (route) => false);
+            Navigator.pop(context);
           },
         ),
       ),
       backgroundColor: const Color(0xff2a2a2a),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text("Rate Us"),
+      body: Column(
+        children: const [
+          Divider(
+            color: Colors.grey,
+          ),
+          Center(
+            child: Text(
+              "Rate Us",
+              style: TextStyle(color: Colors.white),
             ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: Rate(
+              allowHalf: true,
+              allowClear: true,
+              initialValue: 3,
+              color: Colors.yellow,
+              iconSize: 30,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+        ],
       ),
     );
   }
