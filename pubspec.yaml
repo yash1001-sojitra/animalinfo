@@ -27,35 +27,49 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  cached_network_image: ^3.2.0
-  cloud_firestore: ^2.5.4
-  firebase_storage: ^10.2.18
-
-  cupertino_icons: ^1.0.2
-  firebase_auth: ^3.3.5
-  firebase_core: ^1.11.0
   flutter:
     sdk: flutter
-  flutter_advanced_networkimage_2: ^2.0.1
+  cupertino_icons: ^1.0.2
+
+  #firebase
+  firebase_auth: ^3.3.5
+  firebase_core: ^1.11.0
+  firebase_storage: ^10.2.18
+  cloud_firestore: ^2.5.4
+  provider: ^6.0.3
+  uuid: ^3.0.6
+  shared_preferences: ^2.0.15
+
+  #search bar
   flutter_search_bar: ^2.1.0
-  flutter_staggered_grid_view: ^0.4.0
+
+  #image --> svg, cachednetwork
   flutter_svg: ^1.0.3
+  cached_network_image: ^3.2.0
+
+  #file picker
+  file_picker: null
+
+  #gridview
+  flutter_staggered_grid_view: ^0.4.0
+
+  #google font and animaltion and alert , fontawsome
   google_fonts: ^2.2.0
   lottie: ^1.2.1
-  uuid: ^3.0.6
-  provider: ^6.0.3
-  rflutter_alert:
-  shared_preferences: ^2.0.15
-  webview_flutter: ^3.0.0
-  file_picker:
+  rflutter_alert: null
+  font_awesome_flutter: ^10.1.0
+
+  #rate 
   rate: ^0.0.1
+
+  #webview
+  webview_flutter: ^3.0.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  
-  get: 
+  get: null
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

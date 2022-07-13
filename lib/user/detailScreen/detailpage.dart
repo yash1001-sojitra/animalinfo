@@ -15,6 +15,7 @@ class _DetailspageState extends State<Detailspage> {
   Widget build(BuildContext context) {
     final categoryview =
         ModalRoute.of(context)!.settings.arguments as AnimalData;
+
     return Scaffold(
       drawer: const Drawerbtn(),
       drawerEnableOpenDragGesture: true,
@@ -80,26 +81,31 @@ class _DetailspageState extends State<Detailspage> {
                       Builder(
                         builder: (context) {
                           return Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(9.0),
                             child: CircleAvatar(
                               backgroundColor: const Color(0xff1a1a1a),
                               child: IconButton(
-                                  splashColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onPressed: () =>
-                                      Scaffold.of(context).openDrawer(),
-                                  icon: SvgPicture.asset(
-                                    "assets/icons/drawer.svg",
-                                    height: 30,
-                                    width: 35,
-                                    color: Colors.white,
-                                  )),
+                                splashColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onPressed: () {
+                                  setState(() {});
+                                },
+                                icon: SvgPicture.asset(
+                                  "assets/icons/favourite.svg",
+                                  height: 20,
+                                  width: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           );
                         },
                       ),
+                      const SizedBox(
+                        width: 5,
+                      )
                     ],
                   ),
                 ],
