@@ -1,5 +1,4 @@
 // ignore_for_file: unused_field
-import 'dart:math';
 
 import 'package:animalinformation/user/Tabscreens/atoz.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 4,
       child: Scaffold(
         drawerEnableOpenDragGesture: true,
         appBar: AppBar(
@@ -135,10 +134,6 @@ class _HomePageState extends State<HomePage> {
                             "CATEGORY",
                             style: TextStyle(fontSize: 13),
                           ),
-                          Text(
-                            "DEMO",
-                            style: TextStyle(fontSize: 13),
-                          ),
                         ],
                       ),
                     ],
@@ -153,7 +148,6 @@ class _HomePageState extends State<HomePage> {
                   atozcategory(), //A to Z
                   Ourpick(), //Our pick
                   Categorytab(), //Catagory
-                  Demo(),
                 ],
               ))
             ],

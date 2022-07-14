@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:animalinformation/logic/modules/animaldata_model.dart';
 import 'package:animalinformation/user/detailScreen/detailpage.dart';
 import 'package:animalinformation/user/models/animaldatalist_model.dart';
@@ -17,12 +19,11 @@ class _FavouriteState extends State<Favourite> {
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     List<AnimalData> animalList = [];
-     final complaintListRaw = Provider.of<List<AnimalData>?>(context);
-      complaintListRaw?.forEach((element) {
-      if ( element.favoriteList.contains(auth.currentUser?.uid ) ) {
+    final complaintListRaw = Provider.of<List<AnimalData>?>(context);
+    complaintListRaw?.forEach((element) {
+      if (element.favoriteList.contains(auth.currentUser?.uid)) {
         animalList.add(element);
       }
-      ;
     });
     return Scaffold(
         appBar: AppBar(
@@ -48,32 +49,31 @@ class _FavouriteState extends State<Favourite> {
         ),
         backgroundColor: const Color(0xff2a2a2a),
         body: animalList != null
-        ? ListView.builder(
-            itemCount: animalList.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Detailspage(),
-                      settings: RouteSettings(
-                        arguments: animalList[index],
-                      ),
-                    ),
+            ? ListView.builder(
+                itemCount: animalList.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Detailspage(),
+                          settings: RouteSettings(
+                            arguments: animalList[index],
+                          ),
+                        ),
+                      );
+                    },
+                    child: AnimalDataListModel(
+                        animalname: animalList[index].animalName,
+                        animaltype: animalList[index].animalType,
+                        src: animalList[index].url),
                   );
-                },
-                child: AnimalDataListModel(
-                    animalname: animalList[index].animalName,
-                    animaltype: animalList[index].animalType,
-                    src: animalList[index].url),
-              );
-            })
-        : const Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
-            ),
-          )
-          );
+                })
+            : const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ));
   }
 }

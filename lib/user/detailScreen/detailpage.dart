@@ -2,7 +2,6 @@ import 'package:animalinformation/logic/provider/animaldata_provider.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../../logic/modules/animaldata_model.dart';
 import '../homescreen/drawer.dart';
@@ -87,7 +86,7 @@ class _DetailspageState extends State<Detailspage> {
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
                   child: CircleAvatar(
-                    backgroundColor: Color.fromARGB(118, 26, 26, 26),
+                    backgroundColor: const Color.fromARGB(118, 26, 26, 26),
                     child: Center(
                       child: FavoriteButton(
                         isFavorite:
