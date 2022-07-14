@@ -17,7 +17,6 @@ class _PopularAnimalState extends State<PopularAnimal> {
     final animalList = Provider.of<List<AnimalData>?>(context);
     return animalList != null
         ? ListView.builder(
-          
             itemCount: animalList.length,
             itemBuilder: (context, index) {
               return GestureDetector(
