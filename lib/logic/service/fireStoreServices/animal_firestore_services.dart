@@ -16,7 +16,7 @@ class AnimalDataFirestoreService {
   Stream<List<AnimalData>> getAnimalData() {
     return _db
         .collection('AnimalData')
-        .orderBy("time", descending: true)
+        .orderBy("Fav", descending: true)
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((document) => AnimalData.fromFirestore(document.data()))
