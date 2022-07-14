@@ -85,7 +85,7 @@ class _DetailspageState extends State<Detailspage> {
                           backgroundColor: Color.fromARGB(118, 26, 26, 26),
                           child: Center(
                             child: FavoriteButton(
-                              isFavorite: true,
+                              isFavorite: false,
                               iconSize: 40,
                               // iconDisabledColor: Colors.white,
                               valueChanged: (_isFavorite) {
