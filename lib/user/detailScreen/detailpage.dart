@@ -43,61 +43,9 @@ class _DetailspageState extends State<Detailspage> {
                       Icons.arrow_back_ios_new_rounded,
                       color: Colors.white,
                     ),
-                    iconTheme: const IconThemeData(color: Colors.white),
-                    pinned: false,
-                    backgroundColor: Colors.grey,
-                    expandedHeight: 240,
-                    flexibleSpace: FlexibleSpaceBar(
-                      title: Text(
-                        categoryview.animalName,
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      background: Stack(
-                        fit: StackFit.expand,
-                        children: <Widget>[
-                          FadeInImage.assetNetwork(
-                            placeholder: 'assets/lodinggif.gif',
-                            image: categoryview.url,
-                            fit: BoxFit.cover,
-                          ),
-                          const DecoratedBox(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment(0.0, 0.55),
-                                end: Alignment.center,
-                                colors: <Color>[
-                                  Color.fromARGB(142, 0, 0, 0),
-                                  Color.fromARGB(0, 0, 0, 0),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    actions: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: CircleAvatar(
-                          backgroundColor: Color.fromARGB(118, 26, 26, 26),
-                          child: Center(
-                            child: FavoriteButton(
-                              isFavorite: false,
-                              iconSize: 40,
-                              // iconDisabledColor: Colors.white,
-                              valueChanged: (_isFavorite) {
-                                print('Is Favorite : $_isFavorite');
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 7,
-                      )
-                    ],
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
                 ),
               ),
@@ -142,13 +90,15 @@ class _DetailspageState extends State<Detailspage> {
                     backgroundColor: Color.fromARGB(118, 26, 26, 26),
                     child: Center(
                       child: FavoriteButton(
-                        isFavorite: categoryview.favoriteList.contains(user!.uid)?true:false,
+                        isFavorite:
+                            categoryview.favoriteList.contains(user!.uid)
+                                ? true
+                                : false,
                         iconSize: 40,
                         // iconDisabledColor: Colors.white,
                         valueChanged: (_isFavorite) {
                           _isFavorite
-                              ? animalProvider.addFav(
-                                  categoryview.id, user.uid)
+                              ? animalProvider.addFav(categoryview.id, user.uid)
                               : animalProvider.removeFav(
                                   categoryview.id, user.uid);
                         },
