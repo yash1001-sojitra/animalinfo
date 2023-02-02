@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../logic/modules/animaldata_model.dart';
 import '../Tabscreens/categorytab.dart';
-import '../Tabscreens/demo.dart';
 import '../Tabscreens/ourpick.dart';
 import '../Tabscreens/popular.dart';
 import '../detailScreen/detailpage.dart';
