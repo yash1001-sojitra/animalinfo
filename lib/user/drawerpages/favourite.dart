@@ -82,7 +82,7 @@ class _FavouriteState extends State<Favourite> {
                                 child: FadeInImage.assetNetwork(
                                   placeholder: 'assets/lodinggif.gif',
                                   image: animalList[index].url,
-                                  fit: BoxFit.contain,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),

@@ -114,76 +114,81 @@ class _profilepageState extends State<profilepage> {
       ),
       backgroundColor: const Color(0xff2a2a2a),
       body: SafeArea(
-        child: userDataList.isEmpty ?  Container():
-         SingleChildScrollView(
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 60,
-                  ),
-                  Center(
-                    child: Stack(
+        child: userDataList.isEmpty
+            ? Container()
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CircleAvatar(
-                          radius: 75,
-                          backgroundColor: Colors.grey,
+                        const SizedBox(
+                          height: 60,
+                        ),
+                        Center(
                           child: CircleAvatar(
-                            backgroundImage: pickedFile != null
-                                ? FileImage((File("${pickedFile!.path}")))
-                                : NetworkImage(userDataList.first.userimage)
-                                    as ImageProvider,
-                            radius: 70,
+                            radius: 60,
+                            backgroundColor: Colors.grey,
+                            child: Stack(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: pickedFile != null
+                                      ? FileImage((File("${pickedFile!.path}")))
+                                      : NetworkImage(
+                                              userDataList.first.userimage)
+                                          as ImageProvider,
+                                  radius: 55,
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: buildCircle(
+                                      all: 8,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          selectFile();
+                                        },
+                                        child: const Icon(
+                                          Icons.edit,
+                                          color:
+                                              Color.fromRGBO(64, 105, 225, 1),
+                                          size: 20,
+                                        ),
+                                      )),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                        Positioned(
-                          child: buildCircle(
-                              all: 8,
-                              child: GestureDetector(
-                                onTap: () {
-                                  selectFile();
-                                },
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Color.fromRGBO(64, 105, 225, 1),
-                                  size: 20,
-                                ),
-                              )),
-                          right: 3,
-                          top: 110,
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Form(
+                          child: Container(
+                            height: 200,
+                            width: double.infinity,
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 40),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                textfield(
+                                    hintText:
+                                        'Name : ${userDataList.first.Name}'),
+                                textfield(
+                                    hintText:
+                                        'Email : ${userDataList.first.email}')
+                              ],
+                            ),
+                          ),
                         )
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Form(
-                    child: Container(
-                      height: 200,
-                      width: double.infinity,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 40),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          textfield(
-                              hintText: 'Name : ${userDataList.first.Name}'),
-                          textfield(
-                              hintText: 'Email : ${userDataList.first.email}')
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }

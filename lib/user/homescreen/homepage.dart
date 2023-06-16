@@ -175,8 +175,11 @@ class CustomDelegate extends SearchDelegate<String> {
     final animalList = Provider.of<List<AnimalData>?>(context);
     List<String> listToShow;
     List<String> animalnames = [];
+    List<AnimalData> animaldata = [];
+
     animalList?.forEach((element) {
       animalnames.add(element.animalName.toLowerCase());
+      animaldata.add(element);
     });
 
     if (query.isNotEmpty) {
@@ -191,21 +194,86 @@ class CustomDelegate extends SearchDelegate<String> {
     return ListView.builder(
       itemCount: listToShow.length,
       itemBuilder: (_, i) {
-        var animals = listToShow[i];
-        return ListTile(
-          title: Text(animals),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Detailspage(),
-                settings: RouteSettings(
-                  arguments: animalList![i],
-                ),
+        final animals = listToShow[i];
+
+        return Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 100,
+                        width: 100,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            animaldata[i].url,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            animaldata[i].animalName,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            animaldata[i].animalType,
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.favorite_border,
+                    ),
+                  )
+                ],
               ),
-            );
-          },
+            ),
+          ),
         );
+
+        // ListTile(
+        //   title: Text(animals),
+        //   onTap: () {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(
+        //         builder: (context) => const Detailspage(),
+        //         settings: RouteSettings(
+        //           arguments: animalList![i],
+        //         ),
+        //       ),
+        //     );
+        //   },
+        // );
       },
     );
   }

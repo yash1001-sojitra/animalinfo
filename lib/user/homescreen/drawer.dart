@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +10,7 @@ import '../drawerpages/setting.dart';
 
 class Drawerbtn extends StatelessWidget {
   const Drawerbtn({Key? key}) : super(key: key);
-  final style = const TextStyle(fontSize: 24);
+  final style = const TextStyle(fontSize: 20);
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +21,16 @@ class Drawerbtn extends StatelessWidget {
         backgroundColor: const Color(0xff1a1a1a),
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 300,
-              child: DrawerHeader(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.asset(
-                    "assets/pngegg.png",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
+            DrawerHeader(
+              child: SizedBox(
+                child: Image.asset(
+                  "assets/pngegg.png",
+                  fit: BoxFit.contain,
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+              ),
             ),
             GestureDetector(
               onTap: () {
@@ -162,7 +153,7 @@ class Drawerbtn extends StatelessWidget {
                     'v1.0.0',
                     style: TextStyle(
                       fontFamily: 'Avenir',
-                      fontSize: 20,
+                      fontSize: 16,
                       color: Color(0xffffffff),
                     ),
                     textAlign: TextAlign.center,
